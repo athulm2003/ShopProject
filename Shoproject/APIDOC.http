@@ -1,0 +1,64 @@
+###
+GET http://127.0.0.1:8000/category/
+Accept: application/json
+
+### 
+POST http://127.0.0.1:8000/category/
+Content-Type: application/json
+
+{
+    "category_name": "Electronics",
+    "description": "Electronic products"
+}
+
+### 
+GET http://127.0.0.1:8000/category/1/
+Accept: application/json
+### 
+PUT http://127.0.0.1:8000/category/1/
+Content-Type: application/json
+
+{
+    "category_name": "Mobile Phones",
+    "description": "All types of mobile phones"
+}
+
+###
+DELETE http://127.0.0.1:8000/category/1/
+
+### 
+GET http://127.0.0.1:8000/product/
+Accept: application/json
+
+### 
+POST http://127.0.0.1:8000/product/
+Content-Type: application/json
+
+{
+    "category": 1,
+    "product_name": "Samsung Mobile",
+    "price": "25000.00",
+    "stock": 10
+}
+
+### 
+GET http://127.0.0.1:8000/product/1/
+Accept: application/json
+
+### 
+PUT http://127.0.0.1:8000/product/1/
+Content-Type: application/json
+
+{
+    "category": 1,
+    "product_name": "Samsung Galaxy S25",
+    "price": "50000.00",
+    "stock": 15
+}
+
+### 
+DELETE http://127.0.0.1:8000/product/1/
+
+###
+GET http://127.0.0.1:8000/category/1/products/
+Accept: application/json
