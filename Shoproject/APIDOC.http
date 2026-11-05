@@ -2,6 +2,7 @@
 GET http://127.0.0.1:8000/category/
 Accept: application/json
 
+
 ### 
 POST http://127.0.0.1:8000/category/
 Content-Type: application/json
@@ -11,11 +12,14 @@ Content-Type: application/json
     "description": "Electronic products"
 }
 
+
 ### 
-GET http://127.0.0.1:8000/category/1/
+GET http://127.0.0.1:8000/category/2/
 Accept: application/json
+
+
 ### 
-PUT http://127.0.0.1:8000/category/1/
+PUT http://127.0.0.1:8000/category/2/
 Content-Type: application/json
 
 {
@@ -23,42 +27,49 @@ Content-Type: application/json
     "description": "All types of mobile phones"
 }
 
-###
-DELETE http://127.0.0.1:8000/category/1/
 
 ### 
+DELETE http://127.0.0.1:8000/category/2/
+
+
+###
 GET http://127.0.0.1:8000/product/
 Accept: application/json
 
-### 
+
+###
 POST http://127.0.0.1:8000/product/
 Content-Type: application/json
 
 {
-    "category": 1,
-    "product_name": "Samsung Mobile",
-    "price": "25000.00",
-    "stock": 10
+    "product_name": "Laptop",
+    "price": 55000,
+    "stock": 10,
+    "categorys": 4
 }
 
-### 
-GET http://127.0.0.1:8000/product/1/
-Accept: application/json
 
 ### 
-PUT http://127.0.0.1:8000/product/1/
+GET http://127.0.0.1:8000/product/4/
+Accept: application/json
+
+
+### 
+PUT http://127.0.0.1:8000/product/4/
 Content-Type: application/json
 
 {
-    "category": 1,
     "product_name": "Samsung Galaxy S25",
-    "price": "50000.00",
-    "stock": 15
+    "price": 50000,
+    "stock": 15,
+    "categorys": 4
 }
 
+
 ### 
-DELETE http://127.0.0.1:8000/product/1/
+DELETE http://127.0.0.1:8000/product/4/
+
 
 ###
-GET http://127.0.0.1:8000/category/1/products/
+GET http://127.0.0.1:8000/category/4/products/
 Accept: application/json

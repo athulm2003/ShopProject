@@ -1,12 +1,9 @@
-from django.shortcuts import render
-
-
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from Myapp.models import Category, ProductDb
+from Myapp.models import Category, Products
 from Myapp.serializers import CategorySerializer, ProductSerializer
 
 class CategoryListCreateView(APIView):
@@ -17,8 +14,7 @@ class CategoryListCreateView(APIView):
         return Response(serializer_instance.data)
 
     def post(self, request):
-        form_data = request.data
-        serializer_instance = CategorySerializer(data=form_data)
+        serializer_instance = CategorySerializer(data=request.data)
 
         if serializer_instance.is_valid():
             serializer_instance.save()
@@ -33,6 +29,7 @@ class CategoryListCreateView(APIView):
         )
 
 
+
 class CategoryRetrieveUpdateDeleteView(APIView):
 
     def get(self, request, pk):
@@ -44,7 +41,8 @@ class CategoryRetrieveUpdateDeleteView(APIView):
         qs = get_object_or_404(Category, id=pk)
 
         serializer_instance = CategorySerializer(
-            qs, data=request.data
+            instance=qs,
+            data=request.data
         )
 
         if serializer_instance.is_valid():
@@ -63,16 +61,16 @@ class CategoryRetrieveUpdateDeleteView(APIView):
         return Response({"msg": "Category Deleted Successfully"})
 
 
+
 class ProductListCreateView(APIView):
 
     def get(self, request):
-        qs = ProductDb.objects.all()
+        qs = Products.objects.all()
         serializer_instance = ProductSerializer(qs, many=True)
         return Response(serializer_instance.data)
 
     def post(self, request):
-        form_data = request.data
-        serializer_instance = ProductSerializer(data=form_data)
+        serializer_instance = ProductSerializer(data=request.data)
 
         if serializer_instance.is_valid():
             serializer_instance.save()
@@ -87,18 +85,20 @@ class ProductListCreateView(APIView):
         )
 
 
+
 class ProductRetrieveUpdateDeleteView(APIView):
 
     def get(self, request, pk):
-        qs = get_object_or_404(ProductDb, id=pk)
+        qs = get_object_or_404(Products, id=pk)
         serializer_instance = ProductSerializer(qs)
         return Response(serializer_instance.data)
 
     def put(self, request, pk):
-        qs = get_object_or_404(ProductDb, id=pk)
+        qs = get_object_or_404(Products, id=pk)
 
         serializer_instance = ProductSerializer(
-            qs, data=request.data
+            instance=qs,
+            data=request.data
         )
 
         if serializer_instance.is_valid():
@@ -111,17 +111,19 @@ class ProductRetrieveUpdateDeleteView(APIView):
         )
 
     def delete(self, request, pk):
-        qs = get_object_or_404(ProductDb, id=pk)
+        qs = get_object_or_404(Products, id=pk)
         qs.delete()
 
         return Response({"msg": "Product Deleted Successfully"})
+
+
 
 class ProductByCategoryView(APIView):
 
     def get(self, request, pk):
         category = get_object_or_404(Category, id=pk)
 
-        qs = ProductDb.objects.filter(category=category)
+        qs = Products.objects.filter(categorys=category)
 
         serializer_instance = ProductSerializer(qs, many=True)
 
